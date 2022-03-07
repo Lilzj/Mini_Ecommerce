@@ -9,6 +9,6 @@ namespace Mini_Ecommerce.Entities.Enum
     public enum Gender
     {
         Male,
-        Femaile
+        Female
     }
 }
