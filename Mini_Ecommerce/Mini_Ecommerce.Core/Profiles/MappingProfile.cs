@@ -14,19 +14,17 @@ namespace Mini_Ecommerce.Core.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<CustomerRequestDto, Customer>()
-                .ForMember(CustomerRequestDto => CustomerRequestDto.Address, x =>
-                x.MapFrom(Customer => Customer.Address)).ReverseMap();
+            CreateMap<CustomerRequestDto, Customer>();
 
             CreateMap<Customer, CustomerUpdateRequestDto>().ReverseMap();
 
+            CreateMap<Address, AddressRequestDto>().ReverseMap();
+
+            CreateMap<Address, AddressResponseDto>().ReverseMap();
+
             CreateMap<Order, OrderRequestDto>().ReverseMap();
 
-            CreateMap<Customer, CustomerResponse>()
-                .ForMember(CustomerResponse => CustomerResponse.Address, x =>
-                x.MapFrom(Customer => Customer.Address))
-                .ForMember(CustomerResponse => CustomerResponse.Orders, x =>
-                x.MapFrom(x => x.Orders));
+            CreateMap<Customer, CustomerResponse>().ReverseMap();
         }
     }
 }

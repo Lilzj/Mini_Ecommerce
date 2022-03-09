@@ -11,12 +11,14 @@ namespace Mini_Ecommerce.Core.Interface
 {
     public interface ICustomerRepository 
     {
-        Task<bool> AddCustomerAsync(CustomerRequestDto customerRequestDto);
-        Task<bool> AddOrderAsync(OrderRequestDto order);
-        Task<CustomerResponse> GetCustomersAsync();
-        Task<CustomerResponse> GetCustomerByNameAsync(string name);
-        Task<Customer> UpdateCustomerAsync(int CustomerId, CustomerUpdateRequestDto customerUpdateRequestDto);
-        Task<Order> UpdateOrderAsync(string OrderId, OrderUpdateRequestDto orderUpdateRequestDto);
+        Task<bool> AddCustomerAsync(Customer model);
+        Task<bool> AddOrderAsync(Order model);
+        Task<IEnumerable<Customer>> GetCustomersAsync();
+        Task<Customer> GetCustomerByIdAsync(int? id);
+        Task<Order> GetOrderByIdAsync(string id);
+        Task<IEnumerable<Customer>> SearchCustomerByNameAsync(string name);
+        Task<Customer> UpdateCustomerAsync(int CustomerId, Customer model);
+        Task<Order> UpdateOrderAsync(string OrderId, Order model);
         Task<bool> DeleteCustomerAsync(int CustomerId);
 
     }

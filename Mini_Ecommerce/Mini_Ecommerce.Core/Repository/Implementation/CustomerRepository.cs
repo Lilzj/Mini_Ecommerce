@@ -35,16 +35,14 @@ namespace Mini_Ecommerce.Core.Repository.Implementation
             return ValueToReturned;
         }
 
-        public async Task<bool> AddCustomerAsync(CustomerRequestDto customerRequestDto)
+        public async Task<bool> AddCustomerAsync(Customer model)
         {
-            var customer = _map.Map<Customer>(customerRequestDto);
-
-             await _ctx.Customers.AddAsync(customer);
+             await _ctx.Customers.AddAsync(model);
 
             return await SavedAsync();
         }
 
-        public async Task<bool> AddOrderAsync(OrderRequestDto order)
+        public async Task<bool> AddOrderAsync(Order order)
         {
             var Order = _map.Map<Order>(order);
 
@@ -66,31 +64,46 @@ namespace Mini_Ecommerce.Core.Repository.Implementation
             return true;
         }
 
-        public async Task<CustomerResponse> GetCustomerByNameAsync(string name)
+        public async Task<Customer> GetCustomerByIdAsync(int? id)
         {
             var customer = await _ctx.Customers
                 .Include(x => x.Address)
                 .Include(x => x.Orders)
-                .FirstOrDefaultAsync(x => x.Name == name);
+                .FirstOrDefaultAsync(x => x.CustomerId == id);
 
-            var customerResponse =  _map.Map<CustomerResponse>(customer);
 
-            return customerResponse;
+            return customer;
         }
 
-        public Task<CustomerResponse> GetCustomersAsync()
+        public async Task<IEnumerable<Customer>> GetCustomersAsync()
+        {
+            return await _ctx.Customers
+                .Include(x => x.Address)
+                .Include(x => x.Orders).ToListAsync();
+        }
+
+        public Task<Customer> UpdateCustomerAsync(int CustomerId, Customer model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Customer> UpdateCustomerAsync(int CustomerId, CustomerUpdateRequestDto customerUpdateRequestDto)
+        public Task<Order> UpdateOrderAsync(string OrderId, Order model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Order> UpdateOrderAsync(string OrderId, OrderUpdateRequestDto orderUpdateRequestDto)
+        public async Task<IEnumerable<Customer>> SearchCustomerByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            return await _ctx.Customers
+                 .Include(x => x.Address)
+                 .Include(x => x.Orders)
+                 .Where(x => x.Name.ToLower()
+                 .Contains(name.ToLower())).ToListAsync();
+        }
+
+        public async Task<Order> GetOrderByIdAsync(string id)
+        {
+            return await _ctx.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
         }
     }
 }

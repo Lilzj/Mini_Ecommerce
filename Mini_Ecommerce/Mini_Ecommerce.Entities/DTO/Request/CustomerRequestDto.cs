@@ -11,9 +11,9 @@ namespace Mini_Ecommerce.Entities.DTO.Request
     public class CustomerRequestDto
     {
         public string Name { get; set; }
-        public byte Gender { get; set; }
+        public Gender Gender { get; set; }
         public int Age { get; set; }
-        public IEnumerable<Address> Address { get; set; }
+        public IEnumerable<AddressRequestDto> Address { get; set; }
 
     }
 }
