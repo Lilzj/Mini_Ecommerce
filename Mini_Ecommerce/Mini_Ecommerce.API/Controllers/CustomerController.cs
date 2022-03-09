@@ -28,7 +28,7 @@ namespace Mini_Ecommerce.API.Controllers
             if (!id.HasValue || id == 0)
             {
                 ModelState.AddModelError("Customer", "Customer id does not exist");
-                return BadRequest(BaseResponse.CreateResponse(message: "Customer Id not found", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Customer Id not found", errs: ModelState, Customer: ""));
             }
 
             var customer = await _repo.GetCustomerByIdAsync(id);
@@ -36,21 +36,21 @@ namespace Mini_Ecommerce.API.Controllers
             if(customer == null)
             {
                 ModelState.AddModelError("Customer", "Customer does not exist");
-                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, data: ""));
+                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, Customer: ""));
             }
 
-            var customerReturn = _map.Map<Customer, CustomerResponse>(customer);
+            var customerReturn = _map.Map<Customer, CustomerResponseDto>(customer);
 
             return Ok(BaseResponse.CreateResponse("Customer Details", null, customerReturn));
         }
 
-        [HttpGet("{id}", Name = "GetOrder")]
+        [HttpGet("customer-order/{id}", Name = "GetOrder")]
         public async Task<IActionResult> GetOrderById(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
                 ModelState.AddModelError("Order", "Order id does not exist");
-                return BadRequest(BaseResponse.CreateResponse(message: "Order Id not found", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Order Id not found", errs: ModelState, Customer: ""));
             }
 
             var order = await _repo.GetOrderByIdAsync(id);
@@ -58,18 +58,18 @@ namespace Mini_Ecommerce.API.Controllers
             if (order == null)
             {
                 ModelState.AddModelError("Order", "Order does not exist");
-                return NotFound(BaseResponse.CreateResponse(message: "Order not found", errs: ModelState, data: ""));
+                return NotFound(BaseResponse.CreateResponse(message: "Order not found", errs: ModelState, Customer: ""));
             }
 
             return Ok(BaseResponse.CreateResponse("Order Details", null, order));
         }
 
 
-        [HttpPost(Name = "AddCustomer")]
-        public async Task<IActionResult> AddCustomer(CustomerRequestDto  model)
+        [HttpPost]
+        public async Task<IActionResult> AddCustomer([FromBody] CustomerRequestDto  model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, Customer: ""));
 
             var customer = _map.Map<CustomerRequestDto, Customer>(model);
 
@@ -78,20 +78,20 @@ namespace Mini_Ecommerce.API.Controllers
             if (!response)
             {
                 ModelState.AddModelError("Customer", "Could not add Customer");
-                return BadRequest(BaseResponse.CreateResponse(message: "Order not added", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Order not added", errs: ModelState, Customer: ""));
             }
 
-            var customerReturn = _map.Map<Customer, CustomerResponse>(customer);
+            var customerReturn = _map.Map<Customer, CustomerResponseDto>(customer);
 
             return CreatedAtRoute("GetCustomer", new {id = customerReturn.CustomerId},
-                BaseResponse.CreateResponse(message: "Customer added sucessfully", errs: null, data: customerReturn));
+                BaseResponse.CreateResponse(message: "Customer added sucessfully", errs: null, Customer: customerReturn));
         }
 
-        [HttpPost(Name = "AddOrder")]
-        public async Task<IActionResult> AddOrder(OrderRequestDto model)
+        [HttpPost("customer-Order")]
+        public async Task<IActionResult> AddOrder([FromBody] OrderRequestDto model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, Customer: ""));
 
             var order = _map.Map<OrderRequestDto, Order>(model);
 
@@ -100,19 +100,19 @@ namespace Mini_Ecommerce.API.Controllers
             if (!response)
             {
                 ModelState.AddModelError("Order", "Could not add Order");
-                return BadRequest(BaseResponse.CreateResponse(message: "Order not added", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Order not added", errs: ModelState, Customer: ""));
             }
 
             return CreatedAtRoute("GetOrder", new { id = order.OrderId },
-                BaseResponse.CreateResponse(message: "Order added sucessfully", errs: null, data: order));
+                BaseResponse.CreateResponse(message: "Order added sucessfully", errs: null, Customer: order));
         }
 
-        [HttpGet("{name}", Name = "search")]
+        [HttpGet("search/{name}")]
         public async Task<IActionResult> GetCustomer(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return BadRequest(BaseResponse.CreateResponse(message: "No name was provided", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "No name was provided", errs: ModelState, Customer: ""));
             }
 
             var customer = await _repo.SearchCustomerByNameAsync(name);
@@ -120,10 +120,10 @@ namespace Mini_Ecommerce.API.Controllers
             if (customer == null)
             {
                 ModelState.AddModelError("Customer", "Customer does not exist");
-                return NotFound(BaseResponse.CreateResponse(message: "Book name not found", errs: ModelState, data: ""));
+                return NotFound(BaseResponse.CreateResponse(message: "Book name not found", errs: ModelState, Customer: ""));
             }
 
-            var customerReturn = _map.Map<IEnumerable<Customer>, IEnumerable<CustomerResponse>>(customer);
+            var customerReturn = _map.Map<IEnumerable<Customer>, IEnumerable<CustomerResponseDto>>(customer);
 
             return Ok(BaseResponse.CreateResponse("Customer Details", null, customerReturn));
         }
@@ -134,7 +134,7 @@ namespace Mini_Ecommerce.API.Controllers
             if (!id.HasValue || id == 0)
             {
                 ModelState.AddModelError("Customer", "Customer id does not exist");
-                return BadRequest(BaseResponse.CreateResponse(message: "Customer Id not found", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Customer Id not found", errs: ModelState, Customer: ""));
             }
 
             var customer = await _repo.GetCustomerByIdAsync(id);
@@ -142,7 +142,7 @@ namespace Mini_Ecommerce.API.Controllers
             if (customer == null)
             {
                 ModelState.AddModelError("Customer", "Customer does not exist");
-                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, data: ""));
+                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, Customer: ""));
             }
 
             var response = await _repo.DeleteCustomerAsync(id);
@@ -150,24 +150,24 @@ namespace Mini_Ecommerce.API.Controllers
             if (!response)
             {
                 ModelState.AddModelError("Customer", "Could not delete Customer");
-                return BadRequest(BaseResponse.CreateResponse(message: "Customer not deleted", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Customer not deleted", errs: ModelState, Customer: ""));
             }
 
-            return Ok(BaseResponse.CreateResponse(message: "Customer deleted successfully", errs: null, data: ""));
+            return Ok(BaseResponse.CreateResponse(message: "Customer deleted successfully", errs: null, Customer: ""));
 
         }
 
-        [HttpPut("{id}", Name = "UpdateCustomer")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCustomer(int? id, [FromBody] CustomerUpdateRequestDto model)
         {
             if (!id.HasValue || id == 0)
             {
                 ModelState.AddModelError("Customer", "Customer id does not exist");
-                return BadRequest(BaseResponse.CreateResponse(message: "Customer Id not found", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Customer Id not found", errs: ModelState, Customer: ""));
             }
 
             if (!ModelState.IsValid)
-                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, Customer: ""));
 
 
             var customer = await _repo.GetCustomerByIdAsync(id);
@@ -175,7 +175,7 @@ namespace Mini_Ecommerce.API.Controllers
             if (customer == null)
             {
                 ModelState.AddModelError("Customer", "Customer does not exist");
-                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, data: ""));
+                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, Customer: ""));
             }
 
             customer = _map.Map<Customer>(model);
@@ -187,23 +187,23 @@ namespace Mini_Ecommerce.API.Controllers
             if (!response)
             {
                 ModelState.AddModelError("Not updated", "Update not successful");
-                return BadRequest(BaseResponse.CreateResponse(message: "Customer could not be updated", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Customer could not be updated", errs: ModelState, Customer: ""));
             }
 
-            return Ok(BaseResponse.CreateResponse(message: "Customer updated successfully", errs: null, data: ""));
+            return Ok(BaseResponse.CreateResponse(message: "Customer updated successfully", errs: null, Customer: ""));
         }
 
-        [HttpPut("{id}", Name = "UpdateOrder")]
+        [HttpPut("customer-order/{id}")]
         public async Task<IActionResult> UpdateOrder(string id, [FromBody] OrderUpdateRequestDto model)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
                 ModelState.AddModelError("Order", "Order id does not exist");
-                return BadRequest(BaseResponse.CreateResponse(message: "Order Id not found", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Order Id not found", errs: ModelState, Customer: ""));
             }
 
             if (!ModelState.IsValid)
-                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Model state error", errs: ModelState, Customer: ""));
 
 
             var order = await _repo.GetOrderByIdAsync(id);
@@ -211,7 +211,7 @@ namespace Mini_Ecommerce.API.Controllers
             if (order == null)
             {
                 ModelState.AddModelError("Customer", "Customer does not exist");
-                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, data: ""));
+                return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, Customer: ""));
             }
 
             order = _map.Map<Order>(model);
@@ -223,10 +223,10 @@ namespace Mini_Ecommerce.API.Controllers
             if (!response)
             {
                 ModelState.AddModelError("Not updated", "Update not successful");
-                return BadRequest(BaseResponse.CreateResponse(message: "Order could not be updated", errs: ModelState, data: ""));
+                return BadRequest(BaseResponse.CreateResponse(message: "Order could not be updated", errs: ModelState, Customer: ""));
             }
 
-            return Ok(BaseResponse.CreateResponse(message: "Order updated successfully", errs: null, data: ""));
+            return Ok(BaseResponse.CreateResponse(message: "Order updated successfully", errs: null, Customer: ""));
         }
 
     }

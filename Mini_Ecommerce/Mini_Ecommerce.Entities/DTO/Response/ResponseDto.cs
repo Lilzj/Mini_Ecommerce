@@ -10,6 +10,6 @@ namespace Mini_Ecommerce.Entities.DTO.Response
     {
         public string Message { get; set; }
         public Dictionary<string, string> Errs { get; set; }
-        public T Data { get; set; }
+        public T Customer { get; set; }
     }
 }

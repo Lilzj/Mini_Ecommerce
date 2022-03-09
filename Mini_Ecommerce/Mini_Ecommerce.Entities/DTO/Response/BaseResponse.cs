@@ -10,7 +10,7 @@ namespace Mini_Ecommerce.Entities.DTO.Response
     public static class BaseResponse
     {
         public static ResponseDto<T> CreateResponse<T>(string message,
-           ModelStateDictionary errs, T data)
+           ModelStateDictionary errs, T Customer)
         {
             var errors = new Dictionary<string, string>();
             if (errs != null)
@@ -32,7 +32,7 @@ namespace Mini_Ecommerce.Entities.DTO.Response
             {
                 Message = message,
                 Errs = errors,
-                Data = data
+                Customer = Customer
             };
             return obj;
         }

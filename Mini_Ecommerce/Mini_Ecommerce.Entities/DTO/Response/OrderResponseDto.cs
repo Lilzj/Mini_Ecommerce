@@ -10,6 +10,5 @@ namespace Mini_Ecommerce.Entities.DTO.Response
     {
         public string OrderId { get; set; }
         public decimal Amount { get; set; }
-        public DateTime DateCreated { get; set; }
     }
 }

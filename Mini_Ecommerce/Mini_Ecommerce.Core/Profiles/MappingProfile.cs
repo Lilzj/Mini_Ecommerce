@@ -14,7 +14,7 @@ namespace Mini_Ecommerce.Core.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<CustomerRequestDto, Customer>();
+            CreateMap<CustomerRequestDto, Customer>().ReverseMap();
 
             CreateMap<Customer, CustomerUpdateRequestDto>().ReverseMap();
 
@@ -24,7 +24,9 @@ namespace Mini_Ecommerce.Core.Profiles
 
             CreateMap<Order, OrderRequestDto>().ReverseMap();
 
-            CreateMap<Customer, CustomerResponse>().ReverseMap();
+            CreateMap<Customer, CustomerResponseDto>().ReverseMap();
+
+            CreateMap<Order, OrderResponseDto>().ReverseMap();
         }
     }
 }
