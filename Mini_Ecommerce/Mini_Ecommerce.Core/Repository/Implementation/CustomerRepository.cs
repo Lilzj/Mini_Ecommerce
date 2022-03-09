@@ -44,15 +44,14 @@ namespace Mini_Ecommerce.Core.Repository.Implementation
 
         public async Task<bool> AddOrderAsync(Order order)
         {
-            var Order = _map.Map<Order>(order);
 
-            await _ctx.Orders.AddAsync(Order);
+            await _ctx.Orders.AddAsync(order);
 
             return await SavedAsync();
 
         }
 
-        public async Task<bool> DeleteCustomerAsync(int CustomerId)
+        public async Task<bool> DeleteCustomerAsync(int? CustomerId)
         {
             var customer = await _ctx.Customers.FirstOrDefaultAsync(x => x.CustomerId == CustomerId);
 
@@ -82,14 +81,18 @@ namespace Mini_Ecommerce.Core.Repository.Implementation
                 .Include(x => x.Orders).ToListAsync();
         }
 
-        public Task<Customer> UpdateCustomerAsync(int CustomerId, Customer model)
+        public async Task<bool> UpdateCustomerAsync(Customer model)
         {
-            throw new NotImplementedException();
+             _ctx.Customers.Update(model);
+
+            return await SavedAsync();
         }
 
-        public Task<Order> UpdateOrderAsync(string OrderId, Order model)
+        public Task<bool> UpdateOrderAsync(Order model)
         {
-            throw new NotImplementedException();
+            _ctx.Orders.Update(model);
+
+            return SavedAsync();
         }
 
         public async Task<IEnumerable<Customer>> SearchCustomerByNameAsync(string name)

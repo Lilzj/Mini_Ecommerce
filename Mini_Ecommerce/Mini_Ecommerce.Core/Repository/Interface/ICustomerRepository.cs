@@ -17,9 +17,9 @@ namespace Mini_Ecommerce.Core.Interface
         Task<Customer> GetCustomerByIdAsync(int? id);
         Task<Order> GetOrderByIdAsync(string id);
         Task<IEnumerable<Customer>> SearchCustomerByNameAsync(string name);
-        Task<Customer> UpdateCustomerAsync(int CustomerId, Customer model);
-        Task<Order> UpdateOrderAsync(string OrderId, Order model);
-        Task<bool> DeleteCustomerAsync(int CustomerId);
+        Task<bool> UpdateCustomerAsync(Customer model);
+        Task<bool> UpdateOrderAsync(Order model);
+        Task<bool> DeleteCustomerAsync(int? CustomerId);
 
     }
 }
