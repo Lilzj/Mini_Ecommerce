@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\Implementation\" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mini_Ecommerce.Data\Mini_Ecommerce.Data.csproj" />
     <ProjectReference Include="..\Mini_Ecommerce.Entities\Mini_Ecommerce.Entities.csproj" />
   </ItemGroup>
 

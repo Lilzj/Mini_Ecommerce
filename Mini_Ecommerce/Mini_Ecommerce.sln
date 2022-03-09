@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini_Ecommerce.API", "Mini_Ecommerce.API\Mini_Ecommerce.API.csproj", "{DC7A4548-5079-4027-8BFD-5A37A119B5CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mini_Ecommerce.API", "Mini_Ecommerce.API\Mini_Ecommerce.API.csproj", "{DC7A4548-5079-4027-8BFD-5A37A119B5CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini_Ecommerce.Core", "Mini_Ecommerce.Core\Mini_Ecommerce.Core.csproj", "{7176C5BB-5729-494D-9EF8-76CB24A035DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mini_Ecommerce.Core", "Mini_Ecommerce.Core\Mini_Ecommerce.Core.csproj", "{7176C5BB-5729-494D-9EF8-76CB24A035DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini_Ecommerce.Entities", "Mini_Ecommerce.Entities\Mini_Ecommerce.Entities.csproj", "{AB4348D4-FB46-4D09-8F87-C6ADACB2C70F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mini_Ecommerce.Entities", "Mini_Ecommerce.Entities\Mini_Ecommerce.Entities.csproj", "{AB4348D4-FB46-4D09-8F87-C6ADACB2C70F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini_Ecommerce.Data", "Mini_Ecommerce.Data\Mini_Ecommerce.Data.csproj", "{303F62C5-0D1A-41E3-AD12-158941308A47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mini_Ecommerce.Data", "Mini_Ecommerce.Data\Mini_Ecommerce.Data.csproj", "{303F62C5-0D1A-41E3-AD12-158941308A47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Mini_Ecommerce.Core.Interface;
+using Mini_Ecommerce.Core.Profiles;
+using Mini_Ecommerce.Core.Repository.Implementation;
 using Mini_Ecommerce.Data;
 using System.Configuration;
 
@@ -12,6 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<Mini_EcommerceContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("Connection")));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 

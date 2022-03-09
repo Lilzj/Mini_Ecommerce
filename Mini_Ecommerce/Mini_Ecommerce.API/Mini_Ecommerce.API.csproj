@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mini_Ecommerce.Core\Mini_Ecommerce.Core.csproj" />
     <ProjectReference Include="..\Mini_Ecommerce.Data\Mini_Ecommerce.Data.csproj" />
   </ItemGroup>
 
