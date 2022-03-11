@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mini_Ecommerce.Data.Configuration;
 using Mini_Ecommerce.Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,13 @@ namespace Mini_Ecommerce.Data
         public Mini_EcommerceContext(DbContextOptions<Mini_EcommerceContext> options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CustomerConfig());
+            modelBuilder.ApplyConfiguration(new AddressConfig());
+            modelBuilder.ApplyConfiguration(new OrderConfig());
         }
 
         public DbSet<Customer> Customers { get; set; }

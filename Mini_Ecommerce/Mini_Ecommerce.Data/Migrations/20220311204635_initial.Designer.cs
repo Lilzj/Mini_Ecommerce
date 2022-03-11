@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mini_Ecommerce.Data;
 
@@ -10,9 +11,10 @@ using Mini_Ecommerce.Data;
 namespace Mini_Ecommerce.Data.Migrations
 {
     [DbContext(typeof(Mini_EcommerceContext))]
-    partial class Mini_EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20220311204635_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.2");

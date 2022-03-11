@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mini_Ecommerce.Entities", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mini_Ecommerce.Data", "Mini_Ecommerce.Data\Mini_Ecommerce.Data.csproj", "{303F62C5-0D1A-41E3-AD12-158941308A47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini_Ecomerce.Test", "Mini_Ecomerce.Test\Mini_Ecomerce.Test.csproj", "{ED795CAD-7A07-4BD2-9D53-886B7BD426C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{303F62C5-0D1A-41E3-AD12-158941308A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{303F62C5-0D1A-41E3-AD12-158941308A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{303F62C5-0D1A-41E3-AD12-158941308A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED795CAD-7A07-4BD2-9D53-886B7BD426C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED795CAD-7A07-4BD2-9D53-886B7BD426C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED795CAD-7A07-4BD2-9D53-886B7BD426C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED795CAD-7A07-4BD2-9D53-886B7BD426C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
