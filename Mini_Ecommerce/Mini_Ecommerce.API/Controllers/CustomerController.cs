@@ -178,9 +178,7 @@ namespace Mini_Ecommerce.API.Controllers
                 return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, Customer: ""));
             }
 
-            customer = _map.Map<Customer>(model);
-
-            customer.CustomerId = (int)id;
+            _map.Map(model, customer);
 
             var response = await _repo.UpdateCustomerAsync(customer);
 
@@ -214,9 +212,7 @@ namespace Mini_Ecommerce.API.Controllers
                 return NotFound(BaseResponse.CreateResponse(message: "Customer not found", errs: ModelState, Customer: ""));
             }
 
-            order = _map.Map<Order>(model);
-
-            order.OrderId = id;
+             _map.Map(model, order);
 
             var response = await _repo.UpdateOrderAsync(order);
 

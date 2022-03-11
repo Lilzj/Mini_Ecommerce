@@ -1,4 +1,5 @@
-﻿using Mini_Ecommerce.Entities.Models;
+﻿using Mini_Ecommerce.Entities.Enum;
+using Mini_Ecommerce.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace Mini_Ecommerce.Entities.DTO.Request
     public class CustomerUpdateRequestDto
     {
         public string Name { get; set; }
-        public byte Gender { get; set; }
+        public Gender Gender { get; set; }
         public int Age { get; set; }
-        public IEnumerable<Address> Addresses { get; set; }
+        public IEnumerable<AddressRequestDto> Address { get; set; }
     }
 }
